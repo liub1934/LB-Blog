@@ -1,0 +1,21 @@
+*.php
+wp-admin
+wp-includes
+wp-content/cache
+wp-content/languages
+wp-content/uploads
+wp-content/plugins
+wp-content/upgrade
+wp-content/themes/*
+!wp-content/themes/Memory
+
+.well-known
+.user.ini
+.htaccess
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
