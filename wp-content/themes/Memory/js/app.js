@@ -369,6 +369,40 @@ App = {
         }
 		show_date_time();
     },
+
+    openPjax: function() {
+        $(document).pjax('a:not(.post-type-link, .backstage)[target!=_blank]', '#main-part', {
+            fragment: '#main-part',
+            timeout: 8000
+        });
+        $(document).on('pjax:send', function () {
+            $('#main-part').fadeTo(800, 0.0);
+        })
+        $(document).on('pjax:complete', function () {
+            $('#main-part').fadeTo(800, 1);
+            App.imageLazyLoad();
+            App.commentsSubmit();
+            App.postsPaging();
+            App.commentsPaging();
+            App.pShare();
+            App.scrollToTop();
+            App.startTime();
+            App.avatarAjax();
+            App.owoEmoji();
+        })
+        window.addEventListener('popstate', function (e) {
+            $('#main-part').fadeTo(800, 1);
+            App.imageLazyLoad();
+            App.commentsSubmit();
+            App.postsPaging();
+            App.commentsPaging();
+            App.pShare();
+            App.scrollToTop();
+            App.startTime();
+            App.avatarAjax();
+            App.owoEmoji();
+        }, false);
+    }
 }
 
 App.mouseEvent();
@@ -381,3 +415,4 @@ App.scrollToTop();
 App.startTime();
 App.avatarAjax();
 App.owoEmoji();
+App.openPjax()
