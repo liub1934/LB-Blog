@@ -380,6 +380,7 @@ App = {
         })
         $(document).on('pjax:complete', function () {
             $('#main-part').fadeTo(800, 1);
+            $('#main-part').trigger('post-load');
             App.imageLazyLoad();
             App.commentsSubmit();
             App.postsPaging();
@@ -392,6 +393,7 @@ App = {
         })
         window.addEventListener('popstate', function (e) {
             $('#main-part').fadeTo(800, 1);
+            $('#main-part').trigger('post-load');
             App.imageLazyLoad();
             App.commentsSubmit();
             App.postsPaging();
