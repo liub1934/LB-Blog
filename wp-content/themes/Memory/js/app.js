@@ -105,13 +105,12 @@ App = {
 	   });
 	},
 
-	// 图片懒加载
-	// imageLazyLoad: function() {
-	// 	$("div.lazy").lazyload({
-	// 		placeholder : memoryConfig.siteUrl + "/img/loading.gif",
-	// 		effect: "fadeIn",
-	// 	});
-	// },
+	//图片懒加载
+	imageLazyLoad: function() {
+		$("img.lazy").lazyload({
+			placeholder : memoryConfig.siteUrl + "/img/loading.gif"
+		});
+	},
 	
   	owoEmoji:function() {
       	$('.OwO').each(function(i, block) {
@@ -124,7 +123,7 @@ App = {
                 maxHeight: '200px',
                 api: memoryConfig.siteUrl + "/emoji/OwO.min.json"
 			});
-		});
+        });
 	},
 	
 	commentsSubmit:function() {
@@ -373,8 +372,7 @@ App = {
 }
 
 App.mouseEvent();
-// App.imageLazyLoad();
-App.owoEmoji();
+App.imageLazyLoad();
 App.commentsSubmit();
 App.postsPaging();
 App.commentsPaging();
@@ -382,3 +380,4 @@ App.pShare();
 App.scrollToTop();
 App.startTime();
 App.avatarAjax();
+App.owoEmoji();
