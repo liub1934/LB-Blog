@@ -60,15 +60,19 @@ App = {
 		
       	// 打赏
       	$(document).on('click', '.post-pay', function() {
-      		$('.pay-box, #layout-shadow').show();
-		});
-      	$(document).delegate('.pay-header .memory-close', 'click', function(e) {
+      		$('.pay-box, #layout-shadow').fadeIn(300);
+        });
+        // 分享
+      	$(document).on('click', '.post-share', function() {
+            $('.share-box, #layout-shadow').fadeIn(300);
+        });
+      	$(document).delegate('.dialog-box .box-header .memory-close', 'click', function(e) {
           	e.stopPropagation();
-          	$('#layout-shadow').hide();
-      		$(this).parents('.pay-box').hide();
+          	$('#layout-shadow').fadeOut(300);
+      		$(this).closest('.dialog-box').fadeOut(300);
 		});
       	$(document).on('click', '.pay-chose a:not(.chosen)', function() {
-          	$('.pay-chose a, .pay-body>img').toggleClass('chosen');
+          	$('.pay-chose a, .pay-box .box-body img').toggleClass('chosen');
         });
     },
 	
