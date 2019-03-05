@@ -1748,11 +1748,11 @@ div.lazy {
     color: #d43f57;
 }
 
-@media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 1024px) {
     .social-share.share-component {
         display: none;
     }
-}
+} */
 
 @media screen and (max-width: 780px) {
     #header {

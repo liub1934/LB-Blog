@@ -411,20 +411,6 @@ App = {
         }
         show_date_time();
     },
-    scroll: function () {
-        var $sideArticlemenu = $('.side-article-menu');
-        var $pcMenu = $('#pc-menu');
-        var $sidebarRight = $('#sidebar-right');
-        var $articleMenu = $('#article-menu');
-        var top = $sideArticlemenu.offset().top - $(this).scrollTop();
-        var height = $pcMenu.height() + 10;
-        var width = $sidebarRight.width();
-        if (top <= height) {
-            $articleMenu.addClass('fixed').width(width);
-        } else {
-            $articleMenu.removeClass('fixed');
-        }
-    },
     setArticleMenu: function () {
         var $postContent = $('.post-content-real');
         var $sideArticlemenu = $('.side-article-menu');
