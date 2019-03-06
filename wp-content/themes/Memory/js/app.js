@@ -458,7 +458,10 @@ App = {
         })
     },
     initViewer: function(){
-        var imgViewer = new Viewer(document.getElementById('post-content'));
+        var $postContent = document.getElementById('post-content');
+        if($postContent){
+            var imgViewer = new Viewer($postContent);
+        }
     },
     openPjax: function () {
         $(document).pjax('a:not(.post-type-link, .backstage)[target!=_blank]', '#main-part', {
