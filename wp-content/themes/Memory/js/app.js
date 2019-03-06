@@ -458,7 +458,7 @@ App = {
         })
     },
     initViewer: function(){
-        var imgViewer = new Viewer($('.post-content-real')[0]);
+        var imgViewer = new Viewer(document.getElementById('post-content'));
     },
     openPjax: function () {
         $(document).pjax('a:not(.post-type-link, .backstage)[target!=_blank]', '#main-part', {
