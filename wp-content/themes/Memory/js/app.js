@@ -457,6 +457,9 @@ App = {
             $sidebarRight.addClass('has-resize')
         })
     },
+    initViewer: function(){
+        var imgViewer = new Viewer($('.post-content-real')[0]);
+    },
     openPjax: function () {
         $(document).pjax('a:not(.post-type-link, .backstage)[target!=_blank]', '#main-part', {
             fragment: '#main-part',
@@ -509,4 +512,5 @@ App.startTime();
 App.avatarAjax();
 App.owoEmoji();
 App.setArticleMenu();
+App.initViewer();
 // App.openPjax();
