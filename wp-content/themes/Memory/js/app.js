@@ -123,8 +123,13 @@ App = {
 
     //图片懒加载
     imageLazyLoad: function () {
-        $("img.lazy").lazyload({
-            placeholder: memoryConfig.siteUrl + "/img/loading.gif"
+        var $lazyImg = $("img.lazy")
+        $lazyImg.lazyload({
+            placeholder: memoryConfig.siteUrl + "/img/grey.gif",
+            // effect: 'fadeIn'
+        });
+        $lazyImg.load(function() {
+            $(this).addClass('lazy-loaded')
         });
     },
 
@@ -459,8 +464,18 @@ App = {
     },
     initViewer: function(){
         var $postContent = document.getElementById('post-content');
+        var $comments = document.getElementById('comments');
         if($postContent){
-            var imgViewer = new Viewer($postContent);
+            var postViewer = new Viewer($postContent);
+        }
+        if($comments){
+           var commentsViewer = new Viewer($comments, {
+                filter(image) {
+                    var isOwoImg = $(image).hasClass('OwO-img');
+                    var isAvatar = $(image).hasClass('avatar');
+                    if(!isOwoImg && !isAvatar) return true
+                }
+            });
         }
     },
     openPjax: function () {
