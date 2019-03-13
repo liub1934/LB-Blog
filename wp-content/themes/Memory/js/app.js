@@ -420,7 +420,7 @@ App = {
         var padding = [10, 20, 30, 40, 50];
         var li = '';
         var $title = $postContent.find('h1, h2, h3, h4, h5');
-        if (!$title.length) return;
+        if(!$title.length) return;
         $title.each(function (index, item) {
             var index = index + 1;
             var headerText = $(this).text();
@@ -432,7 +432,7 @@ App = {
             }
             $(this).html(hContent);
             //设置不同等级header的排列及缩进样式
-            li += '<li><a href="#L' + index + '" style="padding-left:' + padding[tagIndex] + 'px;" title="' + headerText + '">' + headerText + '</a></li>'
+            li += '<li><a href="#L' + index + '" style="padding-left:' + padding[tagIndex] + 'px;" title="'+ headerText +'">' + headerText + '</a></li>'
         });
         $articleMenu.find('ul').html(li);
         $postContent.data('spy', 'scroll');
@@ -456,6 +456,12 @@ App = {
             $articleMenu.width(width);
             $sidebarRight.addClass('has-resize')
         })
+    },
+    initViewer: function(){
+        var $postContent = document.getElementById('post-content');
+        if($postContent){
+            var imgViewer = new Viewer($postContent);
+        }
     },
     openPjax: function () {
         $(document).pjax('a:not(.post-type-link, .backstage)[target!=_blank]', '#main-part', {
@@ -509,4 +515,5 @@ App.startTime();
 App.avatarAjax();
 App.owoEmoji();
 App.setArticleMenu();
+App.initViewer();
 // App.openPjax();
