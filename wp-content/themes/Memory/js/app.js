@@ -123,9 +123,9 @@ App = {
 
     //图片懒加载
     imageLazyLoad: function () {
-        var $lazyImg = $("img.lazy")
+        var $lazyImg = $('img.lazy')
         $lazyImg.lazyload({
-            placeholder: memoryConfig.siteUrl + "/img/grey.gif",
+            placeholder: 'https://cdn.jsdelivr.net/gh/liub1934/LB-Blog@master/wp-content/themes/Memory/img/grey.gif',
             // effect: 'fadeIn'
         });
         $lazyImg.load(function() {

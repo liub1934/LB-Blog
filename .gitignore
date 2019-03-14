@@ -6,4 +6,11 @@
 !/wp-content/themes
 /wp-content/themes/*
 !/wp-content/themes/Memory
+!/wp-content/plugins
+/wp-content/plugins/*
+!/wp-content/plugins/akismet
+/wp-content/plugins/akismet/*
+!/wp-content/plugins/akismet/_inc
+/wp-content/plugins/akismet/_inc/*
+!/wp-content/plugins/akismet/_inc/form.js
 *.php
