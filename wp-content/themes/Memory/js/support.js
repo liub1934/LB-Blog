@@ -120,31 +120,31 @@ var _createClass = function() {
             value:function(e) {
                 var t = this;
                 this.area = e.target, this.packages = Object.keys(this.odata);
-                for (var a = '\n            <div class="OwO-logo"><span>' + e.logo + '</span></div>\n            <div class="OwO-body" style="width: ' + e.width + '">', s = 0; s < this.packages.length; s++) {
+                for (var a = '\n <div class="OwO-logo"><span>' + e.logo + '</span></div>\n <div class="OwO-body" style="width: ' + e.width + '">', s = 0; s < this.packages.length; s++) {
                     //此处开始，也可以根据类型(this.odata[this.packages[s]].type)来判断文字和图片
                     if(s==0){
                     //颜文字
-                    a += '\n                <ul class="OwO-items OwO-items-' + this.odata[this.packages[s]].type + '" style="max-height: ' + (parseInt(e.maxHeight) - 53 + "px") + ';">';
-                    for (var n = this.odata[this.packages[s]].container, i = 0; i < n.length; i++) a += '\n                    <li class="OwO-item" title="' + n[i].text + '" data-OwO=\'' + n[i].icon + '\'>' + n[i].icon + "</li>";
-                    a += "\n                </ul>";
+                    a += '\n <ul class="OwO-items OwO-items-' + this.odata[this.packages[s]].type + '" style="max-height: ' + (parseInt(e.maxHeight) - 53 + "px") + ';">';
+                    for (var n = this.odata[this.packages[s]].container, i = 0; i < n.length; i++) a += '\n <li class="OwO-item" title="' + n[i].text + '" data-OwO=\'' + n[i].icon + '\'>' + n[i].icon + "</li>";
+                    a += "\n </ul>";
                     }
                     else if(s==1){
                     //阿鲁
-                    a += '\n                <ul class="OwO-items OwO-items-' + this.odata[this.packages[s]].type + '" style="max-height: ' + (parseInt(e.maxHeight) - 53 + "px") + ';">';
-                    for (var n = this.odata[this.packages[s]].container, i = 0; i < n.length; i++) a += '\n                    <li class="OwO-item" title="' + n[i].text + '" data-OwO="@(' + n[i].text + ')">' + n[i].icon + "</li>";
-                    a += "\n                </ul>";
+                    a += '\n <ul class="OwO-items OwO-items-' + this.odata[this.packages[s]].type + '" style="max-height: ' + (parseInt(e.maxHeight) - 53 + "px") + ';">';
+                    for (var n = this.odata[this.packages[s]].container, i = 0; i < n.length; i++) a += '\n <li class="OwO-item" title="' + n[i].text + '" data-OwO="@[' + this.odata[this.packages[s]].name + '-' + n[i].text + ']">' + n[i].icon + "</li>";
+                    a += "\n </ul>";
                     }
                     else {
                     //泡泡
-                    a += '\n                <ul class="OwO-items OwO-items-' + this.odata[this.packages[s]].type + '" style="max-height: ' + (parseInt(e.maxHeight) - 53 + "px") + ';">';
-                    for (var n = this.odata[this.packages[s]].container, i = 0; i < n.length; i++) a += '\n                    <li class="OwO-item" title="' + n[i].text + '" data-OwO="@[' + n[i].text + ']">' + n[i].icon + "</li>";
-                    a += "\n                </ul>";
+                    a += '\n <ul class="OwO-items OwO-items-' + this.odata[this.packages[s]].type + '" style="max-height: ' + (parseInt(e.maxHeight) - 53 + "px") + ';">';
+                    for (var n = this.odata[this.packages[s]].container, i = 0; i < n.length; i++) a += '\n <li class="OwO-item" title="' + n[i].text + '" data-OwO="@[' + this.odata[this.packages[s]].name + '-' + n[i].text + ']">' + n[i].icon + "</li>";
+                    a += "\n </ul>";
                     }
                     //此处结束
                 }
-                a += '\n                <div class="OwO-bar">\n                    <ul class="OwO-packages">';
-                for (var o = 0; o < this.packages.length; o++) a += "\n                        <li><span>" + this.packages[o] + "</span></li>";
-                a += "\n                    </ul>\n                </div>\n            </div>\n            ";
+                a += '\n <div class="OwO-bar">\n  <ul class="OwO-packages">';
+                for (var o = 0; o < this.packages.length; o++) a += "\n <li><span>" + this.packages[o] + "</span></li>";
+                a += "\n </ul> \n </div> \n </div> \n";
               	if (typeof(this.container) != 'undefined' && typeof(this.container.innerHTML) != 'undefined') {
                   this.container.innerHTML = a;
                   
