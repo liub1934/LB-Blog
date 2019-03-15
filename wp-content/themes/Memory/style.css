@@ -676,7 +676,7 @@ div.lazy {
 }
 
 .post-type .post-content .post-tag a {
-    color: #eb7350;
+    /* color: #eb7350; */
 }
 
 .post-type .post-content .post-tag a:before,
@@ -1052,6 +1052,9 @@ div.lazy {
     display: block;
     padding: 5px;
     height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .memory-item.tags_related #tags_related:after {
@@ -1068,6 +1071,7 @@ div.lazy {
 .memory-item.comment-part .comment-respond .avatar {
     width: 48px;
     height: 48px;
+    max-width: unset;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     border: 1px solid #ddd;
@@ -1152,19 +1156,31 @@ div.lazy {
     width: 100%;
 }
 
+.memory-item.comment-part .comment-s .reply-area {
+    position: absolute;
+    right: 0;
+    bottom: 9px;
+}
+
 .memory-item.comment-part .comment-s .comment-submit.push-status {
     -webkit-border-radius: 3px;
     border-radius: 3px;
     background: #0d93ee;
     color: #fff;
-    padding: 4px 8px;
-    line-height: 20px;
+    padding: 0 8px;
+    height: 24px;
+    line-height: 26px;
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
-    height: 28px;
-    position: absolute;
-    right: 0;
-    bottom: 0;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.memory-item.comment-part .comment-s .comment-cancel {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .memory-item.comment-part .comment-s .comment-cancel a {
@@ -1172,15 +1188,14 @@ div.lazy {
     border-radius: 3px;
     background: #0d93ee;
     color: #fff;
-    padding: 4px 8px;
-    line-height: 20px;
+    padding: 0 8px;
+    height: 24px;
+    line-height: 24px;
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 1px -2px rgba(0, 0, 0, 0.1), 0 1px 5px 0 rgba(0, 0, 0, 0.1);
-    height: 28px;
-    position: absolute;
-    right: 70px;
-    bottom: 0;
     font-size: 12px;
+    text-decoration: none;
+    display: inline-block;
 }
 .memory-item.side-article-menu {
     width: 100%;
@@ -1386,7 +1401,13 @@ div.lazy {
     margin-top: 5px;
 }
 
-#comments ol {
+#comments ol.memory-comments-area {
+    padding-left: 0;
+}
+
+#comments ol.memory-comments-area,
+#comments ol.children,
+#comments ul.children {
     list-style: none;
 }
 
@@ -1414,7 +1435,7 @@ div.lazy {
 }
 
 #comments .commentator-comment {
-    margin-left: 56px;
+    margin-left: 60px;
 }
 
 #comments .commentator-comment .userlevel {
@@ -1442,6 +1463,7 @@ div.lazy {
     float: right;
     color: #1a1a1a;
     padding-left: 10px;
+    text-decoration: none;
 }
 
 #comments .comment-comment .comment-info .comment-reply-link:before {
@@ -1497,6 +1519,7 @@ div.lazy {
     display: inline-block;
     height: 36px;
     line-height: 36px;
+    text-decoration: none;
 }
 
 #pagination .memory-comments-page .current,
