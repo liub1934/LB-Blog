@@ -128,9 +128,6 @@ App = {
             placeholder: 'https://cdn.jsdelivr.net/gh/liub1934/LB-Blog@master/wp-content/themes/Memory/img/grey.gif',
             // effect: 'fadeIn'
         });
-        $lazyImg.load(function() {
-            $(this).addClass('lazy-loaded')
-        });
     },
 
     owoEmoji: function () {
