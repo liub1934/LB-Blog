@@ -503,7 +503,7 @@ App.commentsPaging();
 App.pShare();
 App.startTime();
 App.avatarAjax();
-App.owoEmoji();
+// App.owoEmoji();
 App.setArticleMenu();
 App.initViewer();
 App.scrollToTop();
