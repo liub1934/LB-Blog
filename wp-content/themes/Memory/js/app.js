@@ -391,8 +391,24 @@ App = {
             scroll_top_duration = 200,
             $back_to_top = $('#back-to-top');
         $(window).scroll(function () {
+            var $sideArticlemenu = $('.side-article-menu');
+            var bodyWidth = $('body').width()
+            if ($sideArticlemenu && bodyWidth > 760) {
+                var $pcMenu = $('#pc-menu');
+                var $sidebarRight = $('#sidebar-right');
+                var $articleMenu = $('#article-menu');
+                var top = $sideArticlemenu.offset().top - $(this).scrollTop();
+                var height = $pcMenu.height();
+                var width = $sidebarRight.width();
+                if (top <= height) {
+                    $articleMenu.addClass('fixed').width(width);
+                } else {
+                    $articleMenu.removeClass('fixed');
+                }
+            }
             ($(this).scrollTop() > offset) ? $back_to_top.show(): $back_to_top.hide();
         });
+
         $back_to_top.on('click', function (e) {
             e.preventDefault();
             $('body,html').animate({
@@ -424,7 +440,7 @@ App = {
     setArticleMenu: function () {
         var $postContent = $('.post-content-real');
         var $sideArticlemenu = $('.side-article-menu');
-        var $pcMenu = $('#pc-menu');
+        
         var $sidebarRight = $('#sidebar-right');
         var $articleMenu = $('#article-menu');
         var padding = [10, 20, 30, 40, 50];
@@ -451,16 +467,6 @@ App = {
         $('body').scrollspy({
             target: '.side-article-menu'
         });
-        $(window).scroll(function () {
-            var top = $sideArticlemenu.offset().top - $(this).scrollTop();
-            var height = $pcMenu.height() + 10;
-            var width = $sidebarRight.width();
-            if (top <= height) {
-                $articleMenu.addClass('fixed').width(width);
-            } else {
-                $articleMenu.removeClass('fixed');
-            }
-        });
         $(window).resize(function () {
             var width = $sidebarRight.width();
             $articleMenu.width(width);
@@ -483,45 +489,10 @@ App = {
             });
         }
     },
-    openPjax: function () {
-        $(document).pjax('a:not(.post-type-link, .backstage)[target!=_blank]', '#main-part', {
-            fragment: '#main-part',
-            timeout: 8000
-        });
-        $(document).on('pjax:send', function () {
-            $('#main-part').fadeTo(800, 0.0);
-        })
-        $(document).on('pjax:complete', function () {
-            $('#main-part').fadeTo(800, 1);
-            $('#main-part').trigger('post-load');
-            App.imageLazyLoad();
-            App.commentsSubmit();
-            App.postsPaging();
-            App.commentsPaging();
-            App.pShare();
-            App.scrollToTop();
-            App.startTime();
-            App.setArticleMenu();
-            App.avatarAjax();
-            App.owoEmoji();
-        });
-        window.addEventListener('popstate', function (e) {
-            if (window.history.state) {
-                $('#main-part').fadeTo(800, 1);
-                $('#main-part').trigger('post-load');
-                App.imageLazyLoad();
-                App.commentsSubmit();
-                App.postsPaging();
-                App.commentsPaging();
-                App.pShare();
-                App.scrollToTop();
-                App.startTime();
-                App.setArticleMenu();
-
-                App.avatarAjax();
-                App.owoEmoji();
-            }
-        }, false);
+    setPowerMode: function () {
+        POWERMODE.colorful = true;
+        POWERMODE.shake = false;
+        document.body.addEventListener('input', POWERMODE);
     }
 }
 App.mouseEvent();
@@ -530,10 +501,10 @@ App.commentsSubmit();
 App.postsPaging();
 App.commentsPaging();
 App.pShare();
-App.scrollToTop();
 App.startTime();
 App.avatarAjax();
 App.owoEmoji();
 App.setArticleMenu();
 App.initViewer();
-// App.openPjax();
+App.scrollToTop();
+App.setPowerMode();
