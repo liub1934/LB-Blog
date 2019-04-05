@@ -552,7 +552,7 @@ App = {
         }
         if($comments){
            var commentsViewer = new Viewer($comments, {
-                filter(image) {
+                filter: function (image) {
                     var isOwoImg = $(image).hasClass('OwO-img');
                     var isAvatar = $(image).hasClass('avatar');
                     if(!isOwoImg && !isAvatar) return true
