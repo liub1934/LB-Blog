@@ -191,6 +191,7 @@ div.lazy {
     position: relative;
 }
 
+#pc-menu #menu-main .current-menu-item>a,
 #pc-menu #menu-main .menu-item:hover>a {
     color: #1c94e0;
 }
@@ -236,8 +237,14 @@ div.lazy {
 
 #pc-menu #menu-main .menu-item a {
     font-size: 14px;
+    -webkit-transition: all .2s;
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
 }
-
+#pc-menu #menu-main .menu-item a>i {
+    margin-right: 5px
+}
 #pc-menu #menu-login {
     float: right;
     right: 0;
@@ -1201,8 +1208,10 @@ div.lazy {
     position: absolute;
     display: none;
 }
-.memory-item.side-article-menu .textwidget {
+
+.memory-item.side-article-menu .nav {
     background: #fff;
+    padding: 8px;
 }
 
 .memory-item.side-article-menu .nav li {
