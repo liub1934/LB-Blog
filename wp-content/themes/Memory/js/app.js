@@ -195,6 +195,7 @@ App = {
     //图片懒加载
     imageLazyLoad: function () {
         var $lazyImg = $('img.lazy')
+        if (!$lazyImg.length) return
         $lazyImg.lazyload({
             placeholder: 'https://cdn.jsdelivr.net/gh/liub1934/LB-Blog@master/wp-content/themes/Memory/img/grey.gif',
             // effect: 'fadeIn'
@@ -439,21 +440,24 @@ App = {
     },
 
     pShare: function () {
-        $('.social-share').each(function () {
-            var image = (document.images[0] || 0).src || '';
-            var site = getMetaContentByName('site') || getMetaContentByName('Site') || document.title;
-            var title = getMetaContentByName('title') || getMetaContentByName('Title') || document.title;
-            var description = getMetaContentByName('description') || getMetaContentByName('Description') || '';
-            socialShare('.social-share', {
-                url: location.href, // 网址，默认使用 window.location.href
+        var image = (document.images[0] || 0).src || '';
+        var site = getMetaContentByName('site') || getMetaContentByName('Site') || document.title;
+        var title = getMetaContentByName('title') || getMetaContentByName('Title') || document.title;
+        var description = getMetaContentByName('description') || getMetaContentByName('Description') || '';
+        var shareIcons = ['memory-copy', 'memory-weibo', 'memory-qq', 'memory-wechat', 'memory-qzone']
+        $('.social-share').share({
+            url: location.href, // 网址，默认使用 window.location.href
                 source: site, // 来源（QQ空间会用到）, 默认读取head标签：<meta name="site" content="http://overtrue" />
                 title: title, // 标题，默认读取 document.title 或者 <meta name="title" content="share.js" />
                 description: description, // 描述, 默认读取head标签：<meta name="description" content="PHP弱类型的实现原理分析" />
                 image: image, // 图片, 默认取网页中第一个img标签
                 weiboKey: '',
                 sites: ['weibo', 'qq', 'wechat', 'qzone'],
-                wechatQrcodeHelper: '<p>微信扫一扫分享</p>',
-            });
+                wechatQrcodeHelper: ''
+        });
+        $('.social-share .social-share-icon').each(function(index) {
+            $(this).addClass(shareIcons[index]);
+            
         });
     },
 
@@ -559,11 +563,6 @@ App = {
                 }
             });
         }
-    },
-    setPowerMode: function () {
-        POWERMODE.colorful = true;
-        POWERMODE.shake = false;
-        document.body.addEventListener('input', POWERMODE);
     }
 }
 App.mouseEvent();
@@ -578,4 +577,3 @@ App.avatarAjax();
 App.setArticleMenu();
 App.initViewer();
 App.scrollToTop();
-App.setPowerMode();

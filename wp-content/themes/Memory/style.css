@@ -940,13 +940,11 @@ div.lazy {
 .dialog-box .pay-chose a {
     width: 138px !important;
     padding: 10px 0;
-    height: 45px;
     text-align: center;
     border: 1px solid #e6e6e6;
     -webkit-border-radius: 2px;
     border-radius: 2px;
     display: inline-block;
-    line-height: 40px;
     cursor: pointer;
 }
 
