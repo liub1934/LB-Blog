@@ -14,7 +14,10 @@ function getMetaContentByName(name) {
 }
 
 // 消息推送
-function createMessage(message,time=1000) {
+function createMessage(message,time) {
+    if (!time) {
+        time = 1000
+    }
     if ($(".message").length > 0) {
         $(".message").remove();
     }
