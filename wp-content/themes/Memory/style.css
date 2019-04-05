@@ -1279,7 +1279,19 @@ div.lazy {
 .sidebar .memory-item>img {
     padding: 8px;
 }
-
+.sidebar .memory-item .textwidget {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
 .sidebar .memory-item>img {
     width: 100%;
     max-width: 100%;
@@ -1685,10 +1697,13 @@ div.lazy {
 }
 
 .sidebar .tag-cloud-link {
-    background-color: #fbf9f9;
-    height: 22px;
-    padding: 0 8px;
-    border: 1px solid #e3e8e8;
+    padding: 0 5px;
+    -webkit-transition: all .3s;
+    transition: all .3s
+}
+
+.sidebar .tag-cloud-link:hover {
+    color: #2d8cf0;
 }
 
 .comment-comment .OwO-img,
