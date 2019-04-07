@@ -47,9 +47,9 @@ function CopyToClipboard(input) {
         document.body.removeChild (forExecElement);
     }
     if (success) {
-        createMessage("复制成功！你可以直接粘贴！");
+        createMessage("复制成功！您可以直接粘贴！");
     } else {
-        createMessage("抱歉，你的浏览器不支持使用剪切板!");
+        createMessage("抱歉，您的浏览器不支持使用剪切板!");
     }
 }
 function CreateElementForExecCommand (textToClipboard) {
@@ -577,3 +577,47 @@ App.setArticleMenu();
 App.initViewer();
 App.scrollToTop();
 App.owoEmoji();
+
+//注册全选按钮
+Prism.plugins.toolbar.registerButton('select-code', function(env) {
+	var button = document.createElement('i');
+	button.className = 'selectcode memory memory-selectcode'
+	button.title = '全选'
+
+	button.addEventListener('click', function () {
+		// Source: http://stackoverflow.com/a/11128179/2757940
+		if (document.body.createTextRange) { // ms
+			var range = document.body.createTextRange();
+			range.moveToElementText(env.element);
+			range.select();
+		} else if (window.getSelection) { // moz, opera, webkit
+			var selection = window.getSelection();
+			var range = document.createRange();
+			range.selectNodeContents(env.element);
+			selection.removeAllRanges();
+			selection.addRange(range);
+		}
+	});
+
+	return button;
+});
+
+//注册复制按钮
+Prism.plugins.toolbar.registerButton('copy-code', function(env) {
+	var button = document.createElement('i');
+    button.className = 'copycode memory memory-copycode'
+    button.title = '复制'
+    var clip = new ClipboardJS(button, {
+        'text': function () {
+            return env.code;
+        }
+    });
+    clip.on('success', function() {
+        createMessage("复制成功！您可以直接粘贴！");
+    });
+    clip.on('error', function () {
+        createMessage("抱歉，您的浏览器不支持使用剪切板!");
+    });
+
+	return button;
+});
