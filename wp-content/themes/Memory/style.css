@@ -625,6 +625,11 @@ div.lazy {
     border-radius: 3px;
 }
 
+.post-type .post-content img.OwO-img {
+    height: 40px;
+    margin: 0;
+}
+
 .post-type .post-content form {
     margin: 10px 0;
 }
