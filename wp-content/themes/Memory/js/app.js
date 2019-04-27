@@ -515,14 +515,16 @@ App = {
     setArticleMenu: function () {
         var $postContent = $('.post-content-real');
         var $sideArticlemenu = $('.side-article-menu');
-        
         var $sidebarRight = $('#sidebar-right');
         var $articleMenu = $('#article-menu');
         var padding = [10, 20, 30, 40, 50];
         var li = '';
         var $title = $postContent.find('h1, h2, h3, h4, h5');
-        if(!$title.length) return;
-        $title.each(function (index, item) {
+        if(!$title.length) {
+            $sideArticlemenu.fadeOut(300);
+            return
+        };
+        $title.each(function (index) {
             var index = index + 1;
             var headerText = $(this).text();
             var tagName = $(this)[0].tagName.toLowerCase();
@@ -551,18 +553,107 @@ App = {
     initViewer: function(){
         var $postContent = document.getElementById('post-content');
         var $comments = document.getElementById('comments');
+        function filterImage (image) {
+            var isOwoImg = $(image).hasClass('OwO-img');
+            var isAvatar = $(image).hasClass('avatar');
+            if(!isOwoImg && !isAvatar) return true
+        }
         if($postContent){
-            var postViewer = new Viewer($postContent);
+            var postViewer = new Viewer($postContent, {
+                filter: filterImage
+            });
         }
         if($comments){
            var commentsViewer = new Viewer($comments, {
-                filter: function (image) {
-                    var isOwoImg = $(image).hasClass('OwO-img');
-                    var isAvatar = $(image).hasClass('avatar');
-                    if(!isOwoImg && !isAvatar) return true
-                }
+                filter: filterImage
             });
         }
+    },
+    registerButton: function () {
+        //注册全选按钮
+        Prism.plugins.toolbar.registerButton('select-code', function(env) {
+            var button = document.createElement('i');
+            button.className = 'selectcode memory memory-selectcode'
+            button.title = '全选'
+        
+            button.addEventListener('click', function () {
+                // Source: http://stackoverflow.com/a/11128179/2757940
+                if (document.body.createTextRange) { // ms
+                    var range = document.body.createTextRange();
+                    range.moveToElementText(env.element);
+                    range.select();
+                } else if (window.getSelection) { // moz, opera, webkit
+                    var selection = window.getSelection();
+                    var range = document.createRange();
+                    range.selectNodeContents(env.element);
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                }
+            });
+        
+            return button;
+        });
+        
+        //注册复制按钮
+        Prism.plugins.toolbar.registerButton('copy-code', function(env) {
+            var button = document.createElement('i');
+            button.className = 'copycode memory memory-copycode'
+            button.title = '复制'
+            var clip = new ClipboardJS(button, {
+                'text': function () {
+                    return env.code;
+                }
+            });
+            clip.on('success', function() {
+                createMessage("复制成功！您可以直接粘贴！");
+            });
+            clip.on('error', function () {
+                createMessage("抱歉，您的浏览器不支持使用剪切板!");
+            });
+        
+            return button;
+        });
+    },
+    openPjax: function () {
+        $(document).pjax('a:not(.post-type-link, .backstage)[target!=_blank]', '#main-part', {
+            fragment: '#main-part',
+            timeout: 8000
+        });
+        $(document).on('pjax:send', function () {
+            $('#main-part').fadeTo(300, 0.0);
+        })
+        $(document).on('pjax:complete', function () {
+            $('#main-part').fadeTo(300, 1);
+            $('#main-part').trigger('post-load');
+            App.imageLazyLoad();
+            App.commentsSubmit();
+            App.postsPaging();
+            App.commentsPaging();
+            App.pShare();
+            App.setArticleMenu();
+            App.avatarAjax();
+            App.initViewer();
+            App.owoEmoji();
+            Prism.highlightAll();
+            App.registerButton()
+        });
+        window.addEventListener('popstate', function (e) {
+            if (window.history.state) {
+                $('#main-part').fadeTo(300, 1);
+                $('#main-part').trigger('post-load');
+                App.imageLazyLoad();
+                App.commentsSubmit();
+                App.postsPaging();
+                App.commentsPaging();
+                App.pShare();
+                App.setArticleMenu();
+                App.avatarAjax();
+                App.initViewer();
+                App.owoEmoji();
+                Prism.highlightAll();
+                App.registerButton()
+            }
+        }, false);
     }
 }
 App.mouseEvent();
@@ -570,54 +661,12 @@ App.imageLazyLoad();
 App.commentsSubmit();
 App.postsPaging();
 App.commentsPaging();
-App.pShare();
+App.initViewer();
 App.startTime();
 App.avatarAjax();
 App.setArticleMenu();
-App.initViewer();
+App.pShare();
 App.scrollToTop();
 App.owoEmoji();
-
-//注册全选按钮
-Prism.plugins.toolbar.registerButton('select-code', function(env) {
-	var button = document.createElement('i');
-	button.className = 'selectcode memory memory-selectcode'
-	button.title = '全选'
-
-	button.addEventListener('click', function () {
-		// Source: http://stackoverflow.com/a/11128179/2757940
-		if (document.body.createTextRange) { // ms
-			var range = document.body.createTextRange();
-			range.moveToElementText(env.element);
-			range.select();
-		} else if (window.getSelection) { // moz, opera, webkit
-			var selection = window.getSelection();
-			var range = document.createRange();
-			range.selectNodeContents(env.element);
-			selection.removeAllRanges();
-			selection.addRange(range);
-		}
-	});
-
-	return button;
-});
-
-//注册复制按钮
-Prism.plugins.toolbar.registerButton('copy-code', function(env) {
-	var button = document.createElement('i');
-    button.className = 'copycode memory memory-copycode'
-    button.title = '复制'
-    var clip = new ClipboardJS(button, {
-        'text': function () {
-            return env.code;
-        }
-    });
-    clip.on('success', function() {
-        createMessage("复制成功！您可以直接粘贴！");
-    });
-    clip.on('error', function () {
-        createMessage("抱歉，您的浏览器不支持使用剪切板!");
-    });
-
-	return button;
-});
+App.registerButton();
+App.openPjax();
