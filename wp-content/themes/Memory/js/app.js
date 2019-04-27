@@ -614,46 +614,73 @@ App = {
             return button;
         });
     },
-    openPjax: function () {
-        $(document).pjax('a:not(.post-type-link, .backstage)[target!=_blank]', '#main-part', {
-            fragment: '#main-part',
-            timeout: 8000
+    initMditor: function () {
+        var textarea = document.getElementById('comment');
+        //实例化Mditor
+        window.commentEditor = new mditor(textarea);
+        App.uploadImg();
+    },
+    //上传图片到sm.ms
+    uploadImg: function () {
+        var $loading = $('.icon-item.memory-loading');
+        var $uploadFile = $('#upload-file');
+        function upload (file) {
+            var isUploading = false;
+            if (isUploading) return
+            var formData = new FormData();
+            formData.append('smfile', file);
+            $.ajax({
+                url: 'https://sm.ms/api/upload',
+                type: 'POST',
+                data: formData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                beforeSend:function (){
+                    $loading.fadeIn(300);
+                    isUploading = true
+                },
+                success: function (res) {
+                    if (res.code === 'success') {
+                        var filename = res.data.filename;
+                        var fileUrl = res.data.url;
+                        window.commentEditor.insert('!['+ filename +']('+ fileUrl +')');
+                        $loading.fadeOut(300);
+                    } else {
+                        $uploadFile.val('');
+                        $loading.fadeOut(300);
+                        createMessage("图片上传失败，请重试！");
+                    }
+                    isUploading = false
+                },
+                error: function () {
+                    $uploadFile.val('');
+                    $loading.fadeOut(300);
+                    createMessage("图片上传失败，请重试！");
+                    isUploading = false
+                }
+            });
+        }
+        $('#upload-file').on('change', function () {
+            var fileImg = $(this)[0].files[0];
+            upload(fileImg)
         });
-        $(document).on('pjax:send', function () {
-            $('#main-part').fadeTo(300, 0.0);
-        })
-        $(document).on('pjax:complete', function () {
-            $('#main-part').fadeTo(300, 1);
-            $('#main-part').trigger('post-load');
-            App.imageLazyLoad();
-            App.commentsSubmit();
-            App.postsPaging();
-            App.commentsPaging();
-            App.pShare();
-            App.setArticleMenu();
-            App.avatarAjax();
-            App.initViewer();
-            App.owoEmoji();
-            Prism.highlightAll();
-            App.registerButton()
-        });
-        window.addEventListener('popstate', function (e) {
-            if (window.history.state) {
-                $('#main-part').fadeTo(300, 1);
-                $('#main-part').trigger('post-load');
-                App.imageLazyLoad();
-                App.commentsSubmit();
-                App.postsPaging();
-                App.commentsPaging();
-                App.pShare();
-                App.setArticleMenu();
-                App.avatarAjax();
-                App.initViewer();
-                App.owoEmoji();
-                Prism.highlightAll();
-                App.registerButton()
+        $('#comment').on('paste', function (e) {
+            var items = e.originalEvent.clipboardData && e.originalEvent.clipboardData.items;
+            var file = null;
+            if (items && items.length) {
+                // 检索剪切板items
+                for (var i = 0; i < items.length; i++) {
+                    if (items[i].type.indexOf('image') !== -1) {
+                        file = items[i].getAsFile();
+                        break;
+                    }
+                }
             }
-        }, false);
+            if (file) {
+                upload(file);
+            }
+        });
     }
 }
 App.mouseEvent();
@@ -669,4 +696,4 @@ App.pShare();
 App.scrollToTop();
 App.owoEmoji();
 App.registerButton();
-App.openPjax();
+App.initMditor();
