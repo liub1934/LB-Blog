@@ -197,7 +197,7 @@ App = {
         var $lazyImg = $('img.lazy')
         if (!$lazyImg.length) return
         $lazyImg.lazyload({
-            placeholder: 'https://cdn.jsdelivr.net/gh/liub1934/LB-Blog@master/wp-content/themes/Memory/img/grey.gif',
+            placeholder: 'https://cdn.jsdelivr.net/gh/liub1934/LB-Blog@master/wp-content/themes/Memory/img/squares.svg',
             // effect: 'fadeIn'
         });
     },
