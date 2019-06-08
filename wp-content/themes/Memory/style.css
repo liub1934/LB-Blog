@@ -109,51 +109,55 @@ div.lazy {
 }
 
 .rotating {
-    -webkit-animation:rotating 2s linear infinite;
-    -moz-animation:rotating 2s linear infinite;
-    animation:rotating 2s linear infinite;
+    -webkit-animation: rotating 2s linear infinite;
+    -moz-animation: rotating 2s linear infinite;
+    animation: rotating 2s linear infinite;
 }
 
 @-webkit-keyframes rotating {
     0% {
         -webkit-transform: rotate(0deg);
-                transform: rotate(0deg)
+        transform: rotate(0deg)
     }
 
     to {
         -webkit-transform: rotate(1turn);
-                transform: rotate(1turn)
+        transform: rotate(1turn)
     }
 }
+
 @-moz-keyframes rotating {
     0% {
         -moz-transform: rotate(0deg);
-             transform: rotate(0deg)
+        transform: rotate(0deg)
     }
 
     to {
         -moz-transform: rotate(1turn);
-             transform: rotate(1turn)
+        transform: rotate(1turn)
     }
 }
+
 @keyframes rotating {
     0% {
         -webkit-transform: rotate(0deg);
-           -moz-transform: rotate(0deg);
-                transform: rotate(0deg)
+        -moz-transform: rotate(0deg);
+        transform: rotate(0deg)
     }
 
     to {
         -webkit-transform: rotate(1turn);
-           -moz-transform: rotate(1turn);
-                transform: rotate(1turn)
+        -moz-transform: rotate(1turn);
+        transform: rotate(1turn)
     }
 }
+
 .shake:hover {
-    -webkit-animation:aa 5s infinite ease-in-out;
-    -moz-animation:aa 5s infinite ease-in-out;
-    animation:aa 5s infinite ease-in-out;
+    -webkit-animation: aa 5s infinite ease-in-out;
+    -moz-animation: aa 5s infinite ease-in-out;
+    animation: aa 5s infinite ease-in-out;
 }
+
 .message {
     max-width: 640px;
     width: auto;
@@ -282,9 +286,11 @@ div.lazy {
     -moz-transition: all .2s;
     transition: all .2s;
 }
+
 #pc-menu #menu-main .menu-item a>i {
     margin-right: 5px
 }
+
 #pc-menu #menu-login {
     float: right;
     right: 0;
@@ -816,6 +822,7 @@ div.lazy {
     -moz-transition: opacity .3s;
     transition: opacity .3s;
 }
+
 .post-content-real h1:hover .esa-anchor,
 .post-content-real h2:hover .esa-anchor,
 .post-content-real h3:hover .esa-anchor,
@@ -1170,6 +1177,7 @@ div.lazy {
     position: relative;
     margin-top: 10px;
 }
+
 .memory-item.comment-part .comment-s .OwO-left {
     height: 24px;
     line-height: 24px;
@@ -1182,13 +1190,15 @@ div.lazy {
     display: flex;
     -webkit-box-align: center;
     -webkit-align-items: center;
-       -moz-box-align: center;
-            align-items: center;
+    -moz-box-align: center;
+    align-items: center;
 }
+
 .memory-item.comment-part .comment-s .OwO-left .icon-item {
     position: relative;
     margin-right: 8px;
 }
+
 .memory-item.comment-part .comment-s .OwO-left .upload-img #upload-file {
     width: 18px;
     height: 24px;
@@ -1204,9 +1214,11 @@ div.lazy {
     vertical-align: middle;
     display: inline-block
 }
+
 .memory-item.comment-part .comment-s .OwO-left .memory-loading {
     display: none;
 }
+
 .memory-item.comment-part .comment-s .reply-notice {
     font-size: 12px;
     color: #555555;
@@ -1253,6 +1265,7 @@ div.lazy {
     text-decoration: none;
     display: inline-block;
 }
+
 .memory-item.side-article-menu {
     width: 100%;
     position: absolute;
@@ -1272,12 +1285,14 @@ div.lazy {
     -moz-transition: all .3s;
     transition: all .3s
 }
+
 .memory-item.side-article-menu .nav li.active {
     border-left: 3px solid #2D8CF0;
     background-color: #F1F0E8;
 }
+
 .memory-item.side-article-menu .nav li a {
-    display:block;
+    display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1285,6 +1300,7 @@ div.lazy {
     -moz-transition: all .3s;
     transition: all .3s;
 }
+
 .memory-item.side-article-menu .nav li.active a {
     color: #2D8CF0;
 }
@@ -1293,6 +1309,7 @@ div.lazy {
     position: fixed;
     top: 52px;
 }
+
 .sidebar {
     position: relative;
     width: 20%;
@@ -1333,18 +1350,20 @@ div.lazy {
 .sidebar .memory-item>img {
     padding: 8px;
 }
+
 .sidebar .memory-item .textwidget {
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
     display: flex;
     -webkit-flex-wrap: wrap;
-            flex-wrap: wrap;
+    flex-wrap: wrap;
     -webkit-box-align: center;
     -webkit-align-items: center;
-            -moz-box-align: center;
-         align-items: center;
+    -moz-box-align: center;
+    align-items: center;
 }
+
 .sidebar .memory-item>img {
     width: 100%;
     max-width: 100%;
@@ -1923,6 +1942,10 @@ div.lazy {
         display: block;
     }
 
+    #mobile-menu #mobile-menu-main>ul>li.current-menu-item>a {
+        color: #1c94e0;
+    }
+
     #menu-bar,
     #menu-login {
         float: none;
@@ -1956,7 +1979,7 @@ div.lazy {
     }
 
     #main-part {
-        width: 100%;
+        width: 100% !important;
         padding: 0 3px;
     }
 
@@ -1982,11 +2005,13 @@ div.lazy {
         margin: 5px 0 0 0;
     }
 }
+
 @media screen and (max-width: 450px) {
     #comments ul.children {
         padding-left: 0;
     }
 }
+
 /*
  * animation
  */
