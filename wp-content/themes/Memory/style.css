@@ -2855,3 +2855,7 @@ button[data-content] {
 [data-content-length=fit]:after {
     width: 100%
 }
+
+.tocify-extend-page {
+    display: none;
+}
